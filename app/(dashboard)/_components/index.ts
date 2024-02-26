@@ -8,3 +8,5 @@ export * from './board-list';
 export * from './empty-search';
 export * from './empty-favorites';
 export * from './empty-boards';
+export * from './board-card';
+export * from './new-board-button';
