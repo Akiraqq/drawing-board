@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ConvexClientProvider } from '@/providers/convex-client-provider';
+import { Toaster } from '@/components/ui/sonner';
 
 interface Props {
   children: ReactNode;
@@ -19,7 +20,10 @@ const RootLayout: FC<Props> = ({ children }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+        <ConvexClientProvider>
+          <Toaster />
+          {children}
+        </ConvexClientProvider>
       </body>
     </html>
   );
