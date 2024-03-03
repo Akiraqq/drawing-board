@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ConvexClientProvider } from '@/providers/convex-client-provider';
 import { Toaster } from '@/components/ui/sonner';
+import { ModalProvider } from '@/providers';
 
 interface Props {
   children: ReactNode;
@@ -22,6 +23,7 @@ const RootLayout: FC<Props> = ({ children }) => {
       <body className={inter.className}>
         <ConvexClientProvider>
           <Toaster />
+          <ModalProvider />
           {children}
         </ConvexClientProvider>
       </body>

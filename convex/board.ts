@@ -1,4 +1,5 @@
 import { v } from 'convex/values';
+import { MAX_CHAR_LENGTH } from '@/constants';
 import { mutation } from './_generated/server';
 
 const images = [
@@ -34,6 +35,53 @@ export const create = mutation({
       authorId: identity.subject,
       authorName: identity.name!,
       imageUrl: randomImage,
+    });
+
+    return board;
+  },
+});
+
+export const remove = mutation({
+  args: {
+    id: v.id('boards'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Unauthorized');
+    }
+
+    await ctx.db.delete(args.id);
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id('boards'),
+    title: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const title = args.title.trim();
+
+    if (!title) {
+      throw new Error('Title is required');
+    }
+
+    if (title.length > MAX_CHAR_LENGTH) {
+      throw new Error(
+        `Title cannot be longer then ${MAX_CHAR_LENGTH} characters`
+      );
+    }
+
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error('Unauthorized');
+    }
+
+    const board = await ctx.db.patch(args.id, {
+      title: args.title,
     });
 
     return board;

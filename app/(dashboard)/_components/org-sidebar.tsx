@@ -8,7 +8,7 @@ import { Poppins } from 'next/font/google';
 import { LayoutDashboard, Star } from 'lucide-react';
 import { OrganizationSwitcher } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui';
 
 const font = Poppins({
   subsets: ['latin'],

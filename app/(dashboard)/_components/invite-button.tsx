@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { Plus } from 'lucide-react';
 import { OrganizationProfile } from '@clerk/nextjs';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger, Button } from '@/components/ui';
 
 export const InviteButton: FC = () => {
   return (
