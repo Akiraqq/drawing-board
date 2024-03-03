@@ -1,5 +1,5 @@
 import { Star } from 'lucide-react';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { cn } from '@/lib/utils';
 
 interface Props {
@@ -15,6 +15,12 @@ export const Footer: FC<Props> = (props) => {
   const { title, isFavorite, authorLabel, createdAtLabel, onClick, disabled } =
     props;
 
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    onClick();
+  };
+
   return (
     <div className="relative bg-white p-3">
       <p className="text-[13px] truncate max-w-[calc(100%-20px)]">{title}</p>
@@ -26,7 +32,7 @@ export const Footer: FC<Props> = (props) => {
       </p>
       <button
         disabled={disabled}
-        onClick={onClick}
+        onClick={handleClick}
         className={cn(
           'opacity-0 group-hover:opacity-100 transition-opacity absolute top-3 right-3 text-muted-foreground hover: text-blue-600',
           disabled && 'cursor-not-allowed opacity-75'

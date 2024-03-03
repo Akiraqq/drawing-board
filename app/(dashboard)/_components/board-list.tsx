@@ -72,7 +72,7 @@ export const BoardList: FC<Props> = (props) => {
               authorName={board.authorName}
               createdAt={board._creationTime}
               orgId={board.ordId}
-              isFavorite={false}
+              isFavorite={board.isFavorite}
             />
           );
         })}
