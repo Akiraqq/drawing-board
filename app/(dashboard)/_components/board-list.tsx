@@ -19,7 +19,7 @@ interface Props {
 
 export const BoardList: FC<Props> = (props) => {
   const { orgId, query } = props;
-  const data = useQuery(api.boards.get, { orgId });
+  const data = useQuery(api.boards.get, { orgId, ...query });
 
   if (data === undefined) {
     return (

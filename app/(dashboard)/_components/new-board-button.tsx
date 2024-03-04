@@ -3,9 +3,10 @@
 import { FC } from 'react';
 import { cn } from '@/lib/utils';
 import { Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { useApiMutation } from '@/hooks';
 import { api } from '@/convex/_generated/api';
-import { toast } from 'sonner';
 
 interface Props {
   orgId: string;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const NewBoardButton: FC<Props> = (props) => {
+  const router = useRouter();
   const { orgId, disabled } = props;
   const { mutate, pending } = useApiMutation(api.board.create);
 
@@ -23,7 +25,7 @@ export const NewBoardButton: FC<Props> = (props) => {
     })
       .then((id) => {
         toast.success('Board created');
-        // TODO: Redirect to /board/{id}
+        router.push(`/board/${id}`);
       })
       .catch(() => toast.error('Failed to create board'));
   };

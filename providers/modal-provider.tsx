@@ -16,7 +16,7 @@ export const ModalProvider: FC = () => {
 
   return (
     <>
-      <RenameModal />;
+      <RenameModal />
     </>
   );
 };
