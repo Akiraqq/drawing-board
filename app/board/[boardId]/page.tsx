@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { Canvas } from './_components';
+import { Canvas, Loading } from './_components';
+import { Room } from '@/components/room';
 
 interface Props {
   params: {
@@ -9,7 +10,12 @@ interface Props {
 
 const BoardIdPage: FC<Props> = (props) => {
   const { params } = props;
-  return <Canvas {...params} />;
+
+  return (
+    <Room fallback={<Loading />} {...params}>
+      <Canvas {...params} />;
+    </Room>
+  );
 };
 
 export default BoardIdPage;
