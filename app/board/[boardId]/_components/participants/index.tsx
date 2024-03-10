@@ -10,3 +10,5 @@ export const Participants: FC = () => {
     </div>
   );
 };
+
+export * from './participants-skeleton';

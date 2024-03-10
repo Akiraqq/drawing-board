@@ -12,7 +12,7 @@ interface Props {
 export const Canvas: FC<Props> = (props) => {
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
-      <Info />
+      <Info {...props} />
       <Participants />
       <Toolbar />
     </main>

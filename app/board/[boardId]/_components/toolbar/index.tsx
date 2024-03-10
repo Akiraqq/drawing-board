@@ -24,3 +24,5 @@ export const Toolbar: FC = () => {
     </div>
   );
 };
+
+export * from './toolbar-skeleton';
