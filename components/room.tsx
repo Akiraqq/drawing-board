@@ -14,7 +14,7 @@ export const Room: FC<Props> = (props) => {
   const { children, boardId, fallback } = props;
 
   return (
-    <RoomProvider id={boardId} initialPresence={{}}>
+    <RoomProvider id={boardId} initialPresence={{ cursor: null }}>
       <ClientSideSuspense fallback={fallback}>
         {() => children}
       </ClientSideSuspense>
