@@ -1,7 +1,7 @@
 import { PointerEvent } from 'react';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Camera } from '@/types';
+import { Camera, Color } from '@/types';
 
 const COLORS = ['#dc2626', '#d97706', '#059669', '#7c3aed', '#d82777'];
 
@@ -21,4 +21,10 @@ export const pointerEventToCanvasPoint = (
     x: Math.round(event.clientX) - camera.x,
     y: Math.round(event.clientY) - camera.y,
   };
+};
+
+export const colorToCss = (color: Color) => {
+  return `#${color.r.toString(16).padStart(2, '0')}${color.g
+    .toString(16)
+    .padStart(2, '0')}${color.b.toString(16).padStart(2, '0')}`;
 };

@@ -96,3 +96,10 @@ export type CanvasState =
       initialBounds: XYWH;
       corner: Side;
     };
+
+export type Layer =
+  | RectangleLayer
+  | EllipseLayer
+  | PathLayer
+  | TextLayer
+  | NoteLayer;
