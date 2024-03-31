@@ -8,3 +8,4 @@ export * from './user-avatar';
 export * from './cursors-presence';
 export * from './layer-preview';
 export * from './rectangle';
+export * from './selection-box';
