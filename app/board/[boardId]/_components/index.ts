@@ -9,3 +9,6 @@ export * from './cursors-presence';
 export * from './layer-preview';
 export * from './rectangle';
 export * from './selection-box';
+export * from './selection-tools';
+export * from './color-picker';
+export * from './color-button';

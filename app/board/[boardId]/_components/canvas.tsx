@@ -40,6 +40,7 @@ import {
 import { MAX_LAYERS } from '@/constants';
 import { LayerPreview } from './layer-preview';
 import { SelectionBox } from './selection-box';
+import { SelectionTools } from './selection-tools';
 
 interface Props {
   boardId: string;
@@ -283,6 +284,7 @@ export const Canvas: FC<Props> = (props) => {
         undo={undo}
         redo={redo}
       />
+      <SelectionTools camera={camera} setLastUsedColor={setLastUsedColor} />
       <svg
         className="h-[100vh] w-[100vw]"
         onWheel={onWheel}
