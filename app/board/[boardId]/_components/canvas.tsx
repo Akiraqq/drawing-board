@@ -34,6 +34,7 @@ import {
 import { CursorsPresence } from './cursors-presence';
 import {
   connectionIdColor,
+  findIntersectingLayersWithRectangle,
   pointerEventToCanvasPoint,
   resizeBounds,
 } from '@/lib/utils';
@@ -98,6 +99,37 @@ export const Canvas: FC<Props> = (props) => {
     },
     [lastUsedColor]
   );
+
+  const updateSelectionNet = useMutation(
+    ({ storage, setMyPresence }, current: Point, origin: Point) => {
+      const layers = storage.get('layers').toImmutable();
+      setCanvasState({
+        mode: CanvasMode.SELECTION_NET,
+        origin,
+        current,
+      });
+
+      const ids = findIntersectingLayersWithRectangle(
+        layerIds,
+        layers,
+        origin,
+        current
+      );
+
+      setMyPresence({ selection: ids });
+    },
+    [layerIds]
+  );
+
+  const startMultiSelection = useCallback((current: Point, origin: Point) => {
+    if (Math.abs(current.x - origin.x) + Math.abs(current.y - origin.y) > 5) {
+      setCanvasState({
+        mode: CanvasMode.SELECTION_NET,
+        origin,
+        current,
+      });
+    }
+  }, []);
 
   const unselectLayers = useMutation(({ self, setMyPresence }) => {
     if (self.presence.selection.length > 0) {
@@ -181,7 +213,11 @@ export const Canvas: FC<Props> = (props) => {
 
       const current = pointerEventToCanvasPoint(event, camera);
 
-      if (canvasState.mode === CanvasMode.TRANSLATION) {
+      if (canvasState.mode === CanvasMode.PRESSING) {
+        startMultiSelection(current, canvasState.origin);
+      } else if (canvasState.mode === CanvasMode.SELECTION_NET) {
+        updateSelectionNet(current, canvasState.origin);
+      } else if (canvasState.mode === CanvasMode.TRANSLATION) {
         translateSelectedLayers(current);
       } else if (canvasState.mode === CanvasMode.RESIZING) {
         resizeSelectedLayer(current);
@@ -309,6 +345,16 @@ export const Canvas: FC<Props> = (props) => {
             );
           })}
           <SelectionBox onResizeHandlePointerDown={onResizeHandlePointerDown} />
+          {canvasState.mode === CanvasMode.SELECTION_NET &&
+            canvasState.current != null && (
+              <rect
+                className="fill-blue-500/5 stroke-blue-500 stroke-1"
+                x={Math.min(canvasState.origin.x, canvasState.current.x)}
+                y={Math.min(canvasState.origin.y, canvasState.current.y)}
+                width={Math.abs(canvasState.origin.x - canvasState.current.x)}
+                height={Math.abs(canvasState.origin.y - canvasState.current.y)}
+              />
+            )}
           <CursorsPresence />
         </g>
       </svg>
