@@ -12,3 +12,7 @@ export * from './selection-box';
 export * from './selection-tools';
 export * from './color-picker';
 export * from './color-button';
+export * from './ellipse';
+export * from './text';
+export * from './note';
+export * from './path';
