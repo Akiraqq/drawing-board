@@ -200,3 +200,5 @@ export const SelectionBox: FC<Props> = memo((props) => {
     </>
   );
 });
+
+SelectionBox.displayName = 'SelectionBox';

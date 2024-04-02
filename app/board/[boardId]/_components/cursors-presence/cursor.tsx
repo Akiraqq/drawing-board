@@ -48,3 +48,5 @@ export const Cursor: FC<Props> = memo((props) => {
     </foreignObject>
   );
 });
+
+Cursor.displayName = 'Cursor';

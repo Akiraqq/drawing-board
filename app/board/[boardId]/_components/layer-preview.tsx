@@ -47,3 +47,5 @@ export const LayerPreview: FC<LayerProps> = memo((props) => {
       return null;
   }
 });
+
+LayerPreview.displayName = 'LayerPreview';

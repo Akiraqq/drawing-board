@@ -12,3 +12,5 @@ export const CursorsPresence: FC = memo(() => {
     </>
   );
 });
+
+CursorsPresence.displayName = 'CursorsPresence';

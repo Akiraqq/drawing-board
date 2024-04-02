@@ -118,3 +118,5 @@ export const SelectionTools: FC<Props> = memo((props) => {
     </div>
   );
 });
+
+SelectionTools.displayName = 'SelectionTools';
